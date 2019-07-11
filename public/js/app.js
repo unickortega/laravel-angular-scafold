@@ -74523,24 +74523,10 @@ __webpack_require__(/*! angular-route */ "./node_modules/angular-route/index.js"
 
 
 var app = angular__WEBPACK_IMPORTED_MODULE_0___default.a.module('myApp', ['ngRoute']);
-app.controller('FirstController', function ($scope) {
-  $scope.message = 'Hello from FirstController';
-});
-app.controller('SecondController', function ($scope) {
-  $scope.message = 'Hello from Second';
-});
-app.config(function ($routeProvider, $locationProvider) {
-  $routeProvider.when('/', {
-    template: __webpack_require__(/*! ./pages/first.html */ "./resources/js/pages/first.html"),
-    controller: 'FirstController'
-  }).when('/about', {
-    template: __webpack_require__(/*! ./pages/first.html */ "./resources/js/pages/first.html"),
-    controller: 'SecondController'
-  }).otherwise({
-    redirectTo: '/'
-  });
-  $locationProvider.html5Mode(true);
-});
+
+var route = __webpack_require__(/*! ./route */ "./resources/js/route/index.js");
+
+route["default"](app);
 
 /***/ }),
 
@@ -74602,14 +74588,152 @@ if (token) {
 
 /***/ }),
 
-/***/ "./resources/js/pages/first.html":
-/*!***************************************!*\
-  !*** ./resources/js/pages/first.html ***!
-  \***************************************/
+/***/ "./resources/js/pages/about/Controller.js":
+/*!************************************************!*\
+  !*** ./resources/js/pages/about/Controller.js ***!
+  \************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = (function (app) {
+  app.controller('AboutController', function ($scope) {
+    $scope.message = 'Hello from About';
+  });
+});
+
+/***/ }),
+
+/***/ "./resources/js/pages/about/index.html":
+/*!*********************************************!*\
+  !*** ./resources/js/pages/about/index.html ***!
+  \*********************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
 module.exports = "{{message}}";
+
+/***/ }),
+
+/***/ "./resources/js/pages/about/index.js":
+/*!*******************************************!*\
+  !*** ./resources/js/pages/about/index.js ***!
+  \*******************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = (function (app) {
+  var controller = __webpack_require__(/*! ./Controller */ "./resources/js/pages/about/Controller.js");
+
+  controller["default"](app);
+  return {
+    path: '/about',
+    template: __webpack_require__(/*! ./index.html */ "./resources/js/pages/about/index.html"),
+    controller: 'AboutController'
+  };
+});
+
+/***/ }),
+
+/***/ "./resources/js/pages/index/Controller.js":
+/*!************************************************!*\
+  !*** ./resources/js/pages/index/Controller.js ***!
+  \************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = (function (app) {
+  app.controller('IndexController', function ($scope) {
+    $scope.message = 'Hello from Index';
+  });
+});
+
+/***/ }),
+
+/***/ "./resources/js/pages/index/index.html":
+/*!*********************************************!*\
+  !*** ./resources/js/pages/index/index.html ***!
+  \*********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "{{message}}";
+
+/***/ }),
+
+/***/ "./resources/js/pages/index/index.js":
+/*!*******************************************!*\
+  !*** ./resources/js/pages/index/index.js ***!
+  \*******************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = (function (app) {
+  var controller = __webpack_require__(/*! ./Controller */ "./resources/js/pages/index/Controller.js");
+
+  controller["default"](app);
+  return {
+    path: '/',
+    template: __webpack_require__(/*! ./index.html */ "./resources/js/pages/index/index.html"),
+    controller: 'IndexController'
+  };
+});
+
+/***/ }),
+
+/***/ "./resources/js/route/index.js":
+/*!*************************************!*\
+  !*** ./resources/js/route/index.js ***!
+  \*************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = (function (app) {
+  var routes = __webpack_require__(/*! ./routes */ "./resources/js/route/routes.js");
+
+  routes = routes["default"](app);
+  app.config(function ($routeProvider, $locationProvider) {
+    for (var route in routes) {
+      $routeProvider.when(routes[route].path, {
+        template: routes[route].template,
+        controller: routes[route].controller
+      });
+    }
+
+    $routeProvider.otherwise({
+      redirectTo: '/'
+    });
+    $locationProvider.html5Mode(true);
+  });
+});
+
+/***/ }),
+
+/***/ "./resources/js/route/routes.js":
+/*!**************************************!*\
+  !*** ./resources/js/route/routes.js ***!
+  \**************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _pages_index__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../pages/index */ "./resources/js/pages/index/index.js");
+/* harmony import */ var _pages_about__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../pages/about */ "./resources/js/pages/about/index.js");
+
+
+/* harmony default export */ __webpack_exports__["default"] = (function (app) {
+  return [Object(_pages_index__WEBPACK_IMPORTED_MODULE_0__["default"])(app), Object(_pages_about__WEBPACK_IMPORTED_MODULE_1__["default"])(app)];
+});
 
 /***/ }),
 
